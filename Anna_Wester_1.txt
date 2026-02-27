@@ -1,1 +1,47 @@
 https://github.com/AnnaWester73/anna_wester_fruitloop
+
+Generellt från grundstrukturen i projektet har jag ändrat om i strukturen
+för att få en renare arkitektur.
+
+grid.py ansvarar Spelplan.
+player.py ansvarar för spelarens data.
+pickups.py ansvarar för Items.
+game.py ansvarar Spelregler
+config.py ansvarar konfiguration av värden
+gui.py ansvarar för utskrift och användargränssnitt
+
+Utöver övningsuppgifter har det tillkommit logik för Game over.
+För att lättare testa spelet se i config för att ändra start värden:
+
+Följande är löst i projektet
+Version 1:
+* A. "Spelaren ska börja nära mitten av rummet.". Hanteras i config.py och i game.py
+* B. "Förflyttningar i alla 4 riktningar. (Med tangenterna WASD.)". Hanteras i game.py
+* C. "Man ska inte kunna gå igenom väggar." Hanteras i player.py med funktionerna handle-move och can_move.
+* D. "Fruktsallad - alla frukter ska vara värda 20 poäng i stället för 10.". Hanteras i config.py och skapas pickups.py
+* E. "Inventory - alla saker som man plockar upp ska sparas i en lista.". Hanteras i player.py och funktion add_item
+* F. "Nytt kommando: "i", skriver ut innehållet i spelarens inventory." Hanteras i game.py
+* G. "The floor is lava - för varje steg man går ska man tappa 1 poäng." Hanteras i game.py i funktion handle_move
+
+* H. Ej klar Använd for-loopar för att skapa flera, sammanhängande väggar på kartan. Se till att det inte skapas några rum som man inte kan komma in i. Gör detta i filen grid.py.
+
+Version 2
+* I. "Fällor - introducera valfri fälla till spelplanen.
+Om man går på en ruta med en fälla ska man förlora 10 poäng.
+Fällan ska ligga kvar så att man kan falla i den flera gånger."  Hanteras i config.py och game.py i funktion handle_move
+
+* J. Spade - en ny sak man kan plocka upp.
+När man går in i en vägg nästa gång,
+förbrukas spaden för att ta bort väggen. Hanteras i config.py och player.py i funktionen can move()
+
+
+Version 3
+* O. "Grace period - efter man har tagit plockat upp något,
+kan man gå 5 steg utan att det dras några poäng." Hanteras i config.py och player.py i funktionen add_item() och apply_step_penalty()
+
+* Q. "Tryck "B" för att placera en bomb.
+Efter 3 drag smäller bomben och förstör allt på sin ruta
+och de åtta som gränsar till den.
+(fällor, väggar, m.m.) Om spelaren är kvar förlorar man poäng." Hanteras i config.py och i game.py finns spelregler
+
+* R. Ett nytt kommando ("T" för trap) för att desarmera fällor. Hanteras i game.py med en ny funktion
