@@ -32,13 +32,14 @@ class Game:
         """Flytta spelaren och plocka upp item om det finns."""
         if self.player.can_move(dx, dy, self.grid):
 
-            new_x = self.player.pos_x + dx
-            new_y = self.player.pos_y + dy
-
-            maybe_item = self.grid.get(new_x, new_y)
-
             self.player.move(dx, dy)
             self.player.apply_step_penalty(config.player_step_penalty)
+
+            if self.grid.get(self.player.pos_x, self.player.pos_y) == self.grid.internal_wall:
+                self.player.remove_wall_breaker()
+                self.grid.remove_connected_wall(self.player.pos_x, self.player.pos_y)
+
+            maybe_item = self.grid.get(self.player.pos_x, self.player.pos_y)
 
             if isinstance(maybe_item, pickups.Item):
 
@@ -51,7 +52,7 @@ class Game:
                 else:
                     self.player.add_item(maybe_item)
                     gui.print_item_found(maybe_item.name, maybe_item.value)
-                    self.grid.clear(new_x, new_y)
+                    self.grid.clear(self.player.pos_x, self.player.pos_y)
 
     # ----------------------------------
     # BOMB LOGIC
@@ -66,6 +67,12 @@ class Game:
                     "y": self.player.pos_y,
                     "timer": config.bomb_timer
                 })
+
+                self.grid.set(
+                    self.player.pos_x,
+                    self.player.pos_y,
+                    config.placed_bomb_symbol
+                )
 
                 self.player.inventory.remove(item)
                 gui.print_bomb_placed()
@@ -87,6 +94,8 @@ class Game:
                 if (self.player.pos_x, self.player.pos_y) in destroyed:
                     self.player.adjust_score(config.bomb_damage)
                     gui.print_player_hit_by_explosion(config.bomb_damage)
+
+                self.grid.clear(bomb["x"], bomb["y"])
 
                 self.active_bombs.remove(bomb)
 
@@ -149,8 +158,7 @@ class Game:
         while command not in config.commands["quit"]:
             gui.print_status(self)
 
-            # Läs in användarens kommando
-            command = input("Command: ").casefold()[:1]
+            command = gui.print_command_prompt()
 
             self.handle_command(command)
 

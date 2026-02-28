@@ -14,6 +14,7 @@ Utöver övningsuppgifter har det tillkommit logik för Game over.
 För att lättare testa spelet se i config för att ändra start värden:
 
 Följande är löst i projektet
+
 Version 1 Grundkrav:
 A.) Start nära mitten
 → player_start_x och player_start_y beräknas från gridens mitt i config.py.

@@ -1,17 +1,18 @@
-import random               # Används för att slumpa positioner på spelplanen
+
 import config
 
 class Grid:
     """Representerar spelplanen. Du kan ändra standardstorleken och tecknen för olika rutor. """
 
     def __init__(self):
-        """Skapa ett objekt av klassen Grid"""
-        # Spelplanen lagras i en lista av listor. Vi använder "list comprehension" för att sätta tecknet för "empty" på varje plats på spelplanen.
+        #Spelplanen lagras i en lista av listor. Vi använder "list comprehension"
+        # för att sätta tecknet för "empty" på varje plats på spelplanen.
         self.width = config.grid_width
         self.height = config.grid_height
         self.empty = config.grid_empty
         self.exterior_wall = config.grid_exterior_wall
         self.internal_wall = config.grid_internal_wall
+        self.player = None
 
         self.data = [[self.empty for _ in range(self.width)] for _ in range(
             self.height)]
@@ -156,16 +157,17 @@ class Grid:
     # RANDOM
     # =========================
 
-    # Används i filen pickups.py
-    def get_random_x(self):
-        """Slumpa en x-position på spelplanen"""
-        return random.randint(0, self.width-1)
-
-    def get_random_y(self):
-        """Slumpa en y-position på spelplanen"""
-        return random.randint(0, self.height-1)
-
-
     def is_empty(self, x, y):
         """Returnerar True om det inte finns något på aktuell ruta (inte vägg eller item"""
         return self.get(x, y) == self.empty
+
+    def get_empty_cells(self):
+        """Returnerar en lista för alla tomma celler"""
+        result = []
+
+        for x in range(0, self.width):
+            for y in range(0, self.height):
+                if self.is_empty(x, y):
+                    result.append((x, y))
+        return result
+

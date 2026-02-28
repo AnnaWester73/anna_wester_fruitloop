@@ -35,6 +35,8 @@ def print_player_hit_by_explosion(damage):
 def print_trap_disarmed():
     print("Trap disarmed!")
 
+def print_command_prompt():
+    return input("Enter a command: ").casefold()[:1]
 
 def print_game_over(score):
     print("--------------------------------------")

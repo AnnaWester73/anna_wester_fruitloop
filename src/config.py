@@ -60,6 +60,7 @@ grace_steps = 5
 
 bomb_timer = 3
 bomb_damage = -20
+placed_bomb_symbol = "*"
 
 items = {
     "carrot": {

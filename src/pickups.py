@@ -1,4 +1,6 @@
 import config
+import random
+
 
 class Item:
     """Representerar saker man kan plocka upp."""
@@ -31,10 +33,11 @@ def randomize(grid):
                 properties=data
             )
 
-            while True:
-                x = grid.get_random_x()
-                y = grid.get_random_y()
+            # Kollar om det finns en tom cell, så länge det finns läggs ett item ut random.
+            empty_cells = grid.get_empty_cells()
 
-                if grid.is_empty(x, y):
-                    grid.set(x, y, item)
-                    break
+            if len(empty_cells) == 0:
+                return
+
+            (x, y) = random.choice(empty_cells)
+            grid.set(x, y, item)

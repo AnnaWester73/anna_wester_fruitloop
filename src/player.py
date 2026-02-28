@@ -1,9 +1,6 @@
 import config
 
 class Player:
-    # Symbol för spelaren (används dock inte direkt här,
-    # utan "@"" ritas i Grid.__str__)
-    # Marker = "@"
 
     def __init__(self, x, y,start_score):
         # Startposition och poäng
@@ -34,7 +31,8 @@ class Player:
     def add_item(self, item):
         self.inventory.append(item)
         self.adjust_score(item.value)
-        self.grace_counter = config.grace_steps
+        # Ger gratis steg varje gång någo plockas upp.
+        self.grace_counter = self.grace_counter + config.grace_steps
 
     def show_inventory(self):
         return ", ".join(item.name for item in self.inventory)
@@ -76,17 +74,20 @@ class Player:
 
         # Innervägg
         if cell == grid.internal_wall:
-
-            # Leta efter item med breaks_wall-egenskap
-            for item in self.inventory:
-                if item.properties.get("breaks_wall"):
-                    grid.remove_connected_wall(new_x, new_y)        # Tar bort hela väggen
-                    self.inventory.remove(item)
-                    return True
-            return False
+            return self.can_break_wall()
 
         return True
 
+    def can_break_wall(self):
+        for item in self.inventory:
+            if item.properties.get("breaks_wall"):
+                return True
 
+        return False
 
+    def remove_wall_breaker(self):
+        for item in self.inventory:
+            if item.properties.get("breaks_wall"):
+                self.inventory.remove(item)
+                return
 
