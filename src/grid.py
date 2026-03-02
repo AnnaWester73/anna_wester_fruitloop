@@ -1,5 +1,5 @@
 
-import config
+from . import config
 
 class Grid:
     """Representerar spelplanen. Du kan ändra standardstorleken och tecknen för olika rutor. """
@@ -109,27 +109,71 @@ class Grid:
     # WALL REMOVAL
     # =========================
 
-    def remove_connected_wall(self, x, y):
+    def remove_connected_line(self, x, y):
+        """Tar bort hela sammanhängande raka väggar (vågrät eller lodrät) från position (x, y).
+        Kontrollerar även hörn och räknare tar bort den längsta linjen.
+        """
+        if self.get(x, y) != self.internal_wall:
+            return
 
-        target = self.internal_wall
-        stack = [(x, y)]
+        # =========================
+        # Räkna vägg i x-led
+        # =========================
 
-        while stack:
-            cx, cy = stack.pop()
+        new_x_count = 1
+        new_x = x - 1
+        while new_x >= 0 and self.get(new_x, y) == self.internal_wall:
+            new_x_count = new_x_count + 1
+            new_x = new_x - 1
 
-            if cx < 0 or cx >= self.width:
-                continue
-            if cy < 0 or cy >= self.height:
-                continue
-            if self.get(cx, cy) != target:
-                continue
+        new_x = x + 1
+        while new_x < self.width and self.get(new_x, y) == self.internal_wall:
+            new_x_count = new_x_count + 1
+            new_x = new_x + 1
 
-            self.clear(cx, cy)
+        # =========================
+        # Räkna vägg i y-led
+        # =========================
 
-            stack.append((cx + 1, cy))
-            stack.append((cx - 1, cy))
-            stack.append((cx, cy + 1))
-            stack.append((cx, cy - 1))
+        new_y_count = 1
+        new_y = y - 1
+        while new_y >= 0 and self.get(x, new_y) == self.internal_wall:
+            new_y_count = new_y_count + 1
+            new_y = new_y - 1
+
+        new_y = new_y + 1
+        while new_y < self.height and self.get(x, new_y) == self.internal_wall:
+            new_y_count = new_y_count + 1
+            new_y = new_y + 1
+
+        # =========================
+        # Ta bort den längsta linjen
+        # =========================
+
+        if new_x_count >= new_y_count:
+            # Ta bort vågrät linje (x-led)
+            new_x = x
+            while new_x >= 0 and self.get(new_x, y) == self.internal_wall:
+                self.clear(new_x, y)
+                new_x = new_x - 1
+
+            new_x = x + 1
+            while new_x < self.width and self.get(new_x, y) == self.internal_wall:
+                self.clear(new_x, y)
+                new_x = new_x + 1
+
+
+        else:
+            # Ta bort lodrät linje
+            new_y = y
+            while new_y >= 0 and self.get(x, new_y) == self.internal_wall:
+                self.clear(x, new_y)
+                new_y = new_y - 1
+
+            new_y = y + 1
+            while new_y < self.height and self.get(x, new_y) == self.internal_wall:
+                self.clear(x, new_y)
+                new_y = new_y + 1
 
     def explode_area(self, x, y):
         """

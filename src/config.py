@@ -22,7 +22,7 @@ internal_wall_columns = [grid_width // 3]
 
 player_start_x = grid_width // 2
 player_start_y = grid_height // 2
-player_start_score = 10
+player_start_score = 15
 player_mark ="@"
 player_step_penalty = -1
 

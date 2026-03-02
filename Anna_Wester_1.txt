@@ -65,6 +65,11 @@ R.) Ett nytt kommando ("T" för trap) för att desarmera fällor.
 → Kommando "t"
 → disarm_trap()
 
+S.) TDD. För att köra testfall skriv py -m pytest i rooten for projektet
+→ TDD för player.py
+→ TDD för pickups.py
+
+
 Ej implementerade
 
 K.) Nycklar och kistor
@@ -72,4 +77,3 @@ L.) Bördig jord (spawn var 25:e steg)
 M.) Exit
 N.) Jump
 P.) AI-fiender
-S. TDD

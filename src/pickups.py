@@ -1,9 +1,11 @@
-import config
+from . import config
 import random
 
 
 class Item:
-    """Representerar saker man kan plocka upp."""
+    """Representerar ett object som kan placeras på spelplanen.
+    Innehåller namn, poängvärde symbol och eventuella egenskaper. Hämtas från config.py
+    """
     def __init__(self, name, value, symbol, properties=None):
         self.name = name
         self.value = value
@@ -11,12 +13,14 @@ class Item:
         self.properties = properties or {}
 
     def __str__(self):
+        """ Returnerar objektets symbol"""
         return self.symbol
 
 
 def randomize(grid):
     """
-    Skapar Item-objekt från config och placerar dem slumpmässigt.
+    Skapar Item-objekt från config och placerar dem slumpmässigt på lediga rutor på spelplanen.
+    Används i game__init__ för spelplanen vid start.
     """
 
     for name, data in config.items.items():
