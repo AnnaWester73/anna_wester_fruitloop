@@ -1,10 +1,18 @@
-# Examination
+# Examination 
+Inlämning är för Anna Wester. 
 
 Individuell examinationsuppgift i kursen Programmering med Python.
 
-Börja läs igenom game.py - det är där projektet startas.
+Börja läs igenom Anna_Wester_1.txt som beskriver vilka uppgifter som är lösta.
+
+game.py - det är där projektet startas.
+
+## Delad mapp för Github
+
+https://github.com/AnnaWester73/anna_wester_fruitloop
 
 ## Starta projektet
+
 
 ```commandline
 python -m src.game
