@@ -1,10 +1,8 @@
 # Examination 
 Inlämning är för Anna Wester. 
 
-Börja läs igenom Anna_Wester_1.txt som beskriver vilka uppgifter som är lösta 
-och vilka generella ändringar som gjorts för mer strukturerad kod.
-
-game.py - det är där projektet startas.
+## Se fil i root mappen Anna_Wester_1.txt
+Filen ger en beskrivning av inlämningsuppgiften och vilka punkter som ingår i projektet.
 
 ## Delad mapp för Github
 https://github.com/AnnaWester73/anna_wester_fruitloop
@@ -13,6 +11,12 @@ https://github.com/AnnaWester73/anna_wester_fruitloop
 För att starta spelet.
 Jag har gjort enligt tips att gå in i Edit configuration och adderat src-game för att starta spelet.
 python -m src.game är skapad i "Run configuration"
+
+## Testfall TDD gäller för player.py och pickups.py och ligger i en undermapp /tests
+I rooten i projektet skriv i terminal skriv
+python -m src.game
+Totalt 14 testfall skapade
+
 
 ```commandline
 python -m src.game
