@@ -1,5 +1,5 @@
 
-# Skriver ut spelstatus. Hämtar spelarens poäng, skriver ut spelplanen, spelarens aktuella position och grace period.
+# Skriver ut spelstatus. Hämtar spelarens poäng, skriver ut spelplanen och grace period.
 def print_status(game):
     print("--------------------------------------")
     print(f"You have {game.player.score} points.")

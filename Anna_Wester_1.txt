@@ -70,7 +70,7 @@ S.) TDD. För att köra testfall skriv py -m pytest i rooten for projektet
 → TDD för pickups.py
 
 
-Ej implementerade
+Ej implementerade från version 2 och version 3
 
 K.) Nycklar och kistor
 L.) Bördig jord (spawn var 25:e steg)

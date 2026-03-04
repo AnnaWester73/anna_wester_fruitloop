@@ -40,8 +40,11 @@ class Player:
 
     def add_item(self, item):
         self.inventory.append(item)     # Lägger till item i inventory
-        self.adjust_score(item.value)   # Ökar med poäng
-        self.grace_counter = self.grace_counter + config.grace_steps    # Aktiverar grace period efter man plockat upp ett Item
+        self.adjust_score(item.value)   # Anropar adjust_score() som ökar eller minskar spelarens poäng beroende på items värde
+
+        # Ökar grace med config.grace_steps varje gång.
+        # Grace staplas (t.ex. 2 kvar + 5 nya = 7 totalt).
+        self.grace_counter = self.grace_counter + config.grace_steps
 
     def show_inventory(self):
         return ", ".join(item.name for item in self.inventory)      # Returnerar inventory och används vid utskrift
