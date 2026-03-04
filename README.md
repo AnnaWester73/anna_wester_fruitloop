@@ -2,7 +2,7 @@
 Inlämning är för Anna Wester. 
 
 Börja läs igenom Anna_Wester_1.txt som beskriver vilka uppgifter som är lösta 
-och vilka generella ändringar för men mera strukturerad kod.
+och vilka generella ändringar som gjorts för mer strukturerad kod.
 
 game.py - det är där projektet startas.
 
